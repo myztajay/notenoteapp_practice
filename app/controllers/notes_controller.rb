@@ -2,8 +2,9 @@ class NotesController < ApplicationController
     # sets the ground work to find every specific note ppl make also CREATES INSTANCE VARIABLE
     before_action :find_note, only: [:show, :edit, :update, :destroy]
     
+    # only show notes where they have a user id of current user.
     def index
-        @notes = Note.all.order("created_at DESC")
+        @notes = Note.where(user_id: current_user)
     end
     
     def show
